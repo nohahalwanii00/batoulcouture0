@@ -12,6 +12,11 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+app.get('/health', (req, res) => {
+  const status = mongoose.connection.readyState === 1 ? 'ok' : 'degraded';
+  res.status(200).json({ status, mongoConnected: mongoose.connection.readyState === 1 });
+});
+
 const dressRoutes = require('./routes/dresses');
 const orderRoutes = require('./routes/orders');
 const authRoutes = require('./routes/auth');

@@ -1,36 +1,13 @@
-node_modules/
-
-# Environment files
+client/node_modules
+server/node_modules
+client/build
+server/uploads
 .env
-.env.*
-client/.env
-client/.env.*
 server/.env
-server/.env.*
-
-# Uploaded assets
-server/uploads/
-
-# Build outputs
-client/build/
-
-# Logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# OS-specific files
 .DS_Store
-Thumbs.db
-
-# Environment files
-.env
-.env.*
-client/.env
-client/.env.*
-server/.env
-server/.env.*
-
-# Uploads (runtime images)
-server/uploads/
+cloudflared.exe
+cloudflared2.exe
+/.vercel
+/.idea
+/.vscode
