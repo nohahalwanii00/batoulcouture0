@@ -13,7 +13,17 @@ const Dresses: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>('name');
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const categories = ['all', 'evening', 'wedding', 'cocktail', 'vintage', 'casual'];
+  const categories = [
+    'all',
+    'Abaya underdresses',
+    'Black abayas Kuwaiti',
+    '2024 Winter Collection',
+    '2025 Summer Collection',
+    'Chemise',
+    'Set',
+    'Scarfs',
+    'Gloves',
+  ];
   const sortOptions = [
     { value: 'name', label: 'Name (A-Z)' },
     { value: 'price-low', label: 'Price (Low to High)' },

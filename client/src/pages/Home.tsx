@@ -131,14 +131,14 @@ const Home: React.FC = () => {
               <span className="meta-item">One-on-one styling</span>
             </div>
           </div>
-          <div className="hero-visual">
+          <div className="hero-visual logo-wrapper">
             <img
-              src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200&h=800&fit=crop"
-              alt="Luxury abaya presentation"
-              className="hero-image"
+              src="/bc-logo.png"
+              alt="Batoul Couture logo"
+              className="hero-image logo-image"
               onError={(e) => {
                 const t = e.target as HTMLImageElement;
-                t.src = 'https://via.placeholder.com/800x600?text=Batoul+Couture';
+                t.src = '/logo512.png';
               }}
             />
           </div>
