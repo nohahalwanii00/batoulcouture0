@@ -7,7 +7,6 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npm run dev",
     "client": "cd client && npm start",
-    "build": "npm --prefix client run build",
     "install-all": "npm install && cd server && npm install && cd ../client && npm install"
   },
   "keywords": ["react", "nodejs", "fashion", "boutique", "dresses"],
