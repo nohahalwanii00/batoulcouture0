@@ -1,0 +1,11 @@
+.dashboard { padding: 40px 0; }
+.dashboard-header { display:flex; align-items:center; justify-content:space-between; margin-bottom: 20px; }
+.table-wrapper { overflow-x:auto; }
+.dresses-table { width:100%; border-collapse: collapse; background:#fff; box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+.dresses-table th, .dresses-table td { border:1px solid #eee; padding: 10px; text-align:left; }
+.thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; }
+.btn { padding: 8px 12px; border-radius: 6px; cursor:pointer; }
+.btn-secondary { background:#666; color:#fff; border:none; }
+.btn-link { background:none; border:none; color:#333; text-decoration: underline; cursor:pointer; }
+.btn-danger { background:#e74c3c; color:#fff; border:none; }
+.error-msg { color:#e74c3c; margin-top: 12px; }
