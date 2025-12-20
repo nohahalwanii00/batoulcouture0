@@ -4,6 +4,24 @@ import { dressAPI } from '../services/api';
 import { Dress } from '../types/Dress';
 import './Dashboard.css';
 
+const CATEGORY_OPTIONS = [
+  'Abaya underdresses',
+  'Black abayas Kuwaiti',
+  '2024 Winter Collection',
+  '2025 Summer Collection',
+  'Chemise',
+  'Set',
+  'Scarfs',
+  'Gloves',
+];
+
+const getCategoryOptions = (currentValue: string) => {
+  if (!currentValue) return CATEGORY_OPTIONS;
+  return CATEGORY_OPTIONS.includes(currentValue) ? CATEGORY_OPTIONS : [currentValue, ...CATEGORY_OPTIONS];
+};
+
+const DEFAULT_CATEGORY = CATEGORY_OPTIONS[0];
+
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [dresses, setDresses] = useState<Dress[]>([]);
@@ -15,7 +33,7 @@ const Dashboard: React.FC = () => {
     name: '',
     description: '',
     price: '',
-    category: 'evening',
+    category: DEFAULT_CATEGORY,
     size: [] as string[],
     color: [] as string[],
     material: '',
@@ -33,7 +51,7 @@ const Dashboard: React.FC = () => {
     name: '',
     description: '',
     price: '',
-    category: 'evening',
+    category: DEFAULT_CATEGORY,
     size: [] as string[],
     color: [] as string[],
     material: '',
@@ -74,7 +92,7 @@ const Dashboard: React.FC = () => {
       name: '',
       description: '',
       price: '',
-      category: 'evening',
+      category: DEFAULT_CATEGORY,
       size: [],
       color: [],
       material: '',
@@ -137,7 +155,7 @@ const Dashboard: React.FC = () => {
       name: dress.name || '',
       description: dress.description || '',
       price: String(dress.price ?? ''),
-      category: dress.category || 'evening',
+      category: dress.category || DEFAULT_CATEGORY,
       size: Array.isArray(dress.size) ? dress.size : [],
       color: Array.isArray(dress.color) ? dress.color : [],
       material: dress.material || '',
@@ -234,7 +252,7 @@ const Dashboard: React.FC = () => {
       setDresses(prev => [created, ...prev]);
       // reset form
       setForm({
-        name: '', description: '', price: '', category: 'evening', size: [], color: [], material: '', careInstructions: '', availability: 'in-stock', featured: false, stockQuantity: '1'
+        name: '', description: '', price: '', category: DEFAULT_CATEGORY, size: [], color: [], material: '', careInstructions: '', availability: 'in-stock', featured: false, stockQuantity: '1'
       });
       setImages([]);
       alert('Dress added successfully');
@@ -273,12 +291,11 @@ const Dashboard: React.FC = () => {
                 <div>
                   <label>Category *</label>
                   <select name="category" value={editForm.category} onChange={handleEditInputChange} className="form-control" required>
-                    <option value="evening">Evening</option>
-                    <option value="wedding">Wedding</option>
-                    <option value="casual">Casual</option>
-                    <option value="formal">Formal</option>
-                    <option value="cocktail">Cocktail</option>
-                    <option value="prom">Prom</option>
+                    {getCategoryOptions(editForm.category).map(cat => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -360,12 +377,11 @@ const Dashboard: React.FC = () => {
               <div>
                 <label>Category *</label>
                 <select name="category" value={form.category} onChange={handleInputChange} className="form-control" required>
-                  <option value="evening">Evening</option>
-                  <option value="wedding">Wedding</option>
-                  <option value="casual">Casual</option>
-                  <option value="formal">Formal</option>
-                  <option value="cocktail">Cocktail</option>
-                  <option value="prom">Prom</option>
+                  {getCategoryOptions(form.category).map(cat => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div>
@@ -438,14 +454,13 @@ const Dashboard: React.FC = () => {
                   <th>Name</th>
                   <th>Price</th>
                   <th>Category</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {dresses.map((dress) => (
                   <tr key={dress._id || dress.id}>
-                    <td>
+                    <td className="cell-image">
                       {dress.images && dress.images.length > 0 ? (
                         <img src={dress.images[0].url} alt={dress.images[0].alt || dress.name} className="thumb" />
                       ) : (
@@ -455,10 +470,8 @@ const Dashboard: React.FC = () => {
                     <td>{dress.name}</td>
                     <td>${dress.price}</td>
                     <td>{dress.category}</td>
-                    <td>
+                    <td className="cell-actions">
                       <button className="btn btn-link" onClick={() => handleEditOpen(dress)}>Edit</button>
-                    </td>
-                    <td>
                       <button className="btn btn-danger" onClick={() => handleDelete(dress._id || dress.id)}>Delete</button>
                     </td>
                   </tr>

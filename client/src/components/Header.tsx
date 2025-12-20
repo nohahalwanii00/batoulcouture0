@@ -21,6 +21,17 @@ const Header: React.FC = () => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <div className="header-content">
+           <button
+            className="menu-toggle"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
           <Link to="/" className="logo">
             <h1>Batoul's Couture</h1>
             <span className="tagline">Elegant Abayas</span>
@@ -50,21 +61,16 @@ const Header: React.FC = () => {
             )}
           </nav>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="header-actions">
             <CartIcon />
           </div>
-
-          <button
-            className="menu-toggle"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
         </div>
       </div>
+
+      <div
+        className={`nav-overlay ${isMenuOpen ? 'nav-overlay-open' : ''}`}
+        onClick={() => setIsMenuOpen(false)}
+      />
     </header>
   );
 };

@@ -134,7 +134,7 @@
 .hero-title {
   font-size: 3.5rem;
   font-weight: 300;
-  color: #333;
+  color:  var(--accent-gold);
   margin-bottom: 1.5rem;
   line-height: 1.2;
   font-family: 'Georgia', serif;
@@ -188,6 +188,10 @@
   color: #333;
   margin-bottom: 3rem;
   font-family: 'Georgia', serif;
+}
+
+.home-about-title {
+  color: var(--accent-gold);
 }
 
 .dresses-grid {
@@ -406,6 +410,7 @@
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2.5rem;
+    padding-left: 96px;
   }
   
   .hero-subtitle {
@@ -414,6 +419,7 @@
   
   .section-title {
     font-size: 2rem;
+    color:  #d4af37;
   }
   
   .dresses-grid {
@@ -439,6 +445,7 @@
 @media (max-width: 480px) {
   .hero-title {
     font-size: 2rem;
+  
   }
   
   .container {
@@ -504,10 +511,13 @@
 
 .hero-copy {
   text-align: left;
+  padding-left: 56px;
 }
 
 .hero-visual {
   position: relative;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .hero-image {
@@ -519,14 +529,16 @@
 .logo-wrapper {
   background: #ffffff;
   border-radius: 16px;
-  padding: 24px;
+  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .logo-image {
-  max-width: 480px;
+  max-width: 420px;
   width: 100%;
   height: auto;
   object-fit: contain;
@@ -555,5 +567,9 @@
   }
   .hero-copy {
     text-align: center;
+    padding-left: 0;
+  }
+  .hero-visual {
+    justify-content: flex-end;
   }
 }

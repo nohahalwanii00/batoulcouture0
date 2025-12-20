@@ -8,6 +8,7 @@ const Home: React.FC = () => {
   const [featuredDresses, setFeaturedDresses] = useState<Dress[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [heroImageSrc, setHeroImageSrc] = useState('/batoulcouturelogo.png');
 
   useEffect(() => {
     const fetchFeaturedDresses = async () => {
@@ -85,6 +86,46 @@ const Home: React.FC = () => {
     fetchFeaturedDresses();
   }, []);
 
+  useEffect(() => {
+    let cancelled = false;
+    const source = '/bc.bc.jpeg';
+    const img = new Image();
+    img.src = source;
+    img.onload = () => {
+      if (cancelled) return;
+      try {
+        const canvas = document.createElement('canvas');
+        const width = img.naturalWidth || img.width;
+        const height = img.naturalHeight || img.height;
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        ctx.drawImage(img, 0, 0);
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const data = imageData.data;
+        const threshold = 26;
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          if (r < threshold && g < threshold && b < threshold) {
+            data[i + 3] = 0;
+          }
+        }
+        ctx.putImageData(imageData, 0, 0);
+        const url = canvas.toDataURL('image/png');
+        if (!cancelled) setHeroImageSrc(url);
+      } catch {}
+    };
+    img.onerror = () => {
+      if (!cancelled) setHeroImageSrc(source);
+    };
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   if (loading) {
     return (
       <div className="home-container">
@@ -117,7 +158,7 @@ const Home: React.FC = () => {
       <section className="hero-section split">
         <div className="hero-grid">
           <div className="hero-copy">
-            <h1 className="hero-title">Batoul Couture</h1>
+            <h1 className="hero-title">Batoul's Couture</h1>
             <p className="hero-subtitle">Timeless abayas crafted for your elegance.</p>
             <div className="hero-buttons">
               <Link to="/dresses" className="hero-button primary">Explore Collection</Link>
@@ -131,16 +172,23 @@ const Home: React.FC = () => {
               <span className="meta-item">One-on-one styling</span>
             </div>
           </div>
-          <div className="hero-visual logo-wrapper">
-            <img
-              src="/bc-logo.png"
-              alt="Batoul Couture logo"
-              className="hero-image logo-image"
-              onError={(e) => {
-                const t = e.target as HTMLImageElement;
-                t.src = '/logo512.png';
-              }}
-            />
+          <div className="hero-visual">
+            <div className="logo-wrapper">
+              <img
+                src={heroImageSrc}
+                alt="Batoul Couture"
+                className="hero-image logo-image"
+                onError={(e) => {
+                  const t = e.target as HTMLImageElement;
+                  if (t.dataset.fallback !== '1') {
+                    t.dataset.fallback = '1';
+                    t.src = '/bc-hero.svg';
+                    return;
+                  }
+                  t.src = '/logo512.png';
+                }}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -148,7 +196,7 @@ const Home: React.FC = () => {
       {/* Featured Dresses */}
       <section className="featured-section">
         <div className="container">
-          <h2 className="section-title">Featured Abayas</h2>
+          <h2 className="section-title" >Featured Abayas</h2>
           {error && (
             <div className="warning-message">
               <span>⚠️</span>
@@ -202,7 +250,7 @@ const Home: React.FC = () => {
       <section className="about-section">
         <div className="container">
           <div className="about-content">
-            <h2 className="section-title">About Batoul Couture</h2>
+            <h2 className="section-title" >About Batoul Couture</h2>
             <p className="about-text">
              Batoul’s Couture is a luxury abaya brand 
              specializing in elegant, handcrafted designs that blend
