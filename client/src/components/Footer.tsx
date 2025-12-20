@@ -16,8 +16,6 @@ const Footer: React.FC = () => {
             <ul>
               <li><a href="/dresses">Collection</a></li>
               <li><a href="/contact">Contact Us</a></li>
-              <li><a href="#">Size Guide</a></li>
-              <li><a href="#">Care Instructions</a></li>
             </ul>
           </div>
           

@@ -119,13 +119,6 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const refreshList = async () => {
-    try {
-      const res = await dressAPI.getAll();
-      setDresses(res.data);
-    } catch {}
-  };
-
   // Form handlers
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type, checked } = e.target as any;

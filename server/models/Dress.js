@@ -1,5 +1,22 @@
 const mongoose = require('mongoose');
 
+const CATEGORY_OPTIONS = [
+  'Abaya underdresses',
+  'Black abayas Kuwaiti',
+  '2024 Winter Collection',
+  '2025 Summer Collection',
+  'Chemise',
+  'Set',
+  'Scarfs',
+  'Gloves',
+  'evening',
+  'wedding',
+  'casual',
+  'formal',
+  'cocktail',
+  'prom',
+];
+
 const dressSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -18,7 +35,7 @@ const dressSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ['evening', 'wedding', 'casual', 'formal', 'cocktail', 'prom']
+    enum: CATEGORY_OPTIONS
   },
   size: {
     type: [String],
