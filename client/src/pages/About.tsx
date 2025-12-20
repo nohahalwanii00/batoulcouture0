@@ -44,6 +44,7 @@ const About: React.FC = () => {
       <section className="cta-section">
         <div className="container">
           <Link to="/contact" className="cta-button">Book a Private Appointment</Link>
+          <div className="cta-note">For the comfort of our clients, bookings on this page are for women only</div>
         </div>
       </section>
     </div>

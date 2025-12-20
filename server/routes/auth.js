@@ -3,26 +3,30 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
-const {
-  ADMIN_EMAIL,
-  ADMIN_PASSWORD,
-  JWT_SECRET
-} = process.env;
-
-if (!JWT_SECRET) {
-  console.warn('JWT_SECRET not set in environment. Set it in server/.env');
-}
-
 router.post('/login', (req, res) => {
   try {
-    const { email, password } = req.body;
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    const jwtSecret = process.env.JWT_SECRET;
+    const isProduction = process.env.NODE_ENV === 'production';
+
+    if (!adminEmail || !adminPassword) {
+      return res.status(500).json({ message: 'Admin login is not configured on the server.' });
+    }
+
+    if (isProduction && !jwtSecret) {
+      return res.status(500).json({ message: 'JWT_SECRET is not configured on the server.' });
+    }
+
+    const email = String(req.body?.email ?? '').trim().toLowerCase();
+    const password = String(req.body?.password ?? '').trim();
     if (!email || !password) {
       return res.status(400).json({ message: 'Email and password are required' });
     }
 
     // Simple admin auth using environment variables
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      const token = jwt.sign({ role: 'admin', email }, JWT_SECRET || 'dev_secret', { expiresIn: '7d' });
+    if (email === adminEmail.trim().toLowerCase() && password === adminPassword) {
+      const token = jwt.sign({ role: 'admin', email }, jwtSecret || 'dev_secret', { expiresIn: '7d' });
       return res.json({ token });
     }
 

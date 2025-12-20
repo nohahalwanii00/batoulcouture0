@@ -90,3 +90,9 @@
   transform: translateY(-1px);
   opacity: 0.85;
 }
+
+.cta-note {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #555;
+}
