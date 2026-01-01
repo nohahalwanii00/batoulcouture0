@@ -1,0 +1,13 @@
+client/node_modules
+server/node_modules
+client/build
+server/uploads
+.env
+server/.env
+*.log
+.DS_Store
+cloudflared.exe
+cloudflared2.exe
+/.vercel
+/.idea
+/.vscode
