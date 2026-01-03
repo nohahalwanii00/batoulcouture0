@@ -23,17 +23,17 @@ const About: React.FC = () => {
           </p>
           <div className="features">
             <div className="feature-card">
-              <div className="icon">🧵</div>
+            
               <h3>Handcrafted Elegance</h3>
               <p>Every abaya is made with care, precision, and attention to detail.</p>
             </div>
             <div className="feature-card">
-              <div className="icon">🎨</div>
+            
               <h3>Customization</h3>
               <p>From fabric selection to embellishments, we tailor every detail to you.</p>
             </div>
             <div className="feature-card">
-              <div className="icon">🖤</div>
+           
               <h3>Private Appointments</h3>
               <p>Enjoy one-on-one styling and bespoke consultation for an exclusive experience.</p>
             </div>

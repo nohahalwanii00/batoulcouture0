@@ -75,7 +75,7 @@ const Dashboard: React.FC = () => {
         const res = await dressAPI.getAll();
         setDresses(res.data);
       } catch (err: any) {
-        setError(err?.response?.data?.message || 'Failed to load dresses');
+        setError(err?.response?.data?.message || 'Failed to load abayas');
       } finally {
         setLoading(false);
       }
@@ -110,7 +110,7 @@ const Dashboard: React.FC = () => {
 
   const handleDelete = async (id?: string) => {
     if (!id) return;
-    if (!window.confirm('Delete this dress?')) return;
+    if (!window.confirm('Delete this abaya?')) return;
     try {
       await dressAPI.delete(id);
       setDresses(prev => prev.filter(d => d._id !== id && d.id !== id));
@@ -212,7 +212,7 @@ const Dashboard: React.FC = () => {
       setDresses(prev => prev.map(d => (String(d._id || d.id) === id ? updated : d)));
       setEditingDress(null);
       setEditImages([]);
-      alert('Dress updated successfully');
+      alert('Abaya updated successfully');
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Update failed');
     } finally {
@@ -248,7 +248,7 @@ const Dashboard: React.FC = () => {
         name: '', description: '', price: '', category: DEFAULT_CATEGORY, size: [], color: [], material: '', careInstructions: '', availability: 'in-stock', featured: false, stockQuantity: '1'
       });
       setImages([]);
-      alert('Dress added successfully');
+      alert('Abaya added successfully');
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Create failed');
     } finally {
@@ -266,11 +266,11 @@ const Dashboard: React.FC = () => {
 
         {editingDress && (
           <div className="card" style={{ marginBottom: 20, padding: 16, border: '1px solid #eee', borderRadius: 8 }}>
-            <h2 style={{ marginTop: 0 }}>Edit Dress</h2>
+            <h2 style={{ marginTop: 0 }}>Edit Abaya</h2>
             <form onSubmit={handleEditSubmit}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
                 <div>
-                  <label>Name *</label>
+                  <label>Name * </label>
                   <input name="name" value={editForm.name} onChange={handleEditInputChange} className="form-control" required />
                 </div>
                 <div>
@@ -352,7 +352,7 @@ const Dashboard: React.FC = () => {
 
         {/* Add Dress Form */}
         <div className="card" style={{ marginBottom: 20, padding: 16, border: '1px solid #eee', borderRadius: 8 }}>
-          <h2 style={{ marginTop: 0 }}>Add New Dress</h2>
+          <h2 style={{ marginTop: 0 }}>Add New Abaya</h2>
           <form onSubmit={handleSubmit}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
               <div>
@@ -428,7 +428,7 @@ const Dashboard: React.FC = () => {
             </div>
             <div style={{ marginTop: 12 }}>
               <button type="submit" className="btn btn-secondary" disabled={submitting}>
-                {submitting ? 'Submitting...' : 'Add Dress'}
+                {submitting ? 'Submitting...' : 'Add Abaya'}
               </button>
             </div>
           </form>
@@ -440,7 +440,7 @@ const Dashboard: React.FC = () => {
           <div className="error-msg">{error}</div>
         ) : (
           <div className="table-wrapper">
-            <table className="dresses-table">
+            <table className="abayas-table">
               <thead>
                 <tr>
                   <th>Image</th>

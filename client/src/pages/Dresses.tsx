@@ -174,7 +174,7 @@ const Dresses: React.FC = () => {
       <div className="dresses-container">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading dresses...</p>
+          <p>Loading abayas...</p>
         </div>
       </div>
     );
@@ -201,7 +201,7 @@ const Dresses: React.FC = () => {
       <div className="dresses-header">
         <div className="container">
           <h1 className="page-title">Our Collection</h1>
-          <p className="page-subtitle">Discover our carefully curated selection of elegant dresses</p>
+          <p className="page-subtitle">Discover our carefully curated selection of elegant abayas</p>
         </div>
       </div>
 
@@ -262,7 +262,7 @@ const Dresses: React.FC = () => {
           </div>
 
           <div className="results-info">
-            <p>Showing {filteredAndSortedDresses.length} of {dresses.length} dresses</p>
+            <p>Showing {filteredAndSortedDresses.length} of {dresses.length} abayas</p>
           </div>
         </div>
       </div>

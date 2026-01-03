@@ -162,7 +162,7 @@ const DressDetail: React.FC = () => {
       <div className="dress-detail-container">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading dress details...</p>
+          <p>Loading abayas details...</p>
         </div>
       </div>
     );
@@ -185,10 +185,10 @@ const DressDetail: React.FC = () => {
       <div className="dress-detail-container">
         <div className="error-container">
           <div className="error-icon">❌</div>
-          <h2>Dress Not Found</h2>
-          <p>The dress you're looking for doesn't exist or has been removed.</p>
+          <h2>abaya Not Found</h2>
+          <p>The abaya you're looking for doesn't exist or has been removed.</p>
           <div className="error-actions">
-            <Link to="/dresses" className="back-button">Browse Dresses</Link>
+            <Link to="/dresses" className="back-button">Browse abayas</Link>
             <Link to="/" className="back-button">Go Home</Link>
           </div>
         </div>
@@ -205,7 +205,7 @@ const DressDetail: React.FC = () => {
       <div className="dress-detail-content">
         <nav className="breadcrumb">
           <Link to="/">Home</Link> / 
-          <Link to="/dresses">Dresses</Link> / 
+          <Link to="/dresses">abayas</Link> / 
           <span className="current">{dress.name}</span>
         </nav>
 
@@ -381,15 +381,15 @@ const DressDetail: React.FC = () => {
             {/* Shipping Information */}
             <div className="product-shipping">
               <div className="shipping-info">
-                <span className="shipping-icon">🚚</span>
+                <span className="shipping-icon"></span>
                 <span>Free shipping on orders over $200</span>
               </div>
               <div className="shipping-info">
-                <span className="shipping-icon">📦</span>
+                <span className="shipping-icon"></span>
                 <span>Estimated delivery: 3-5 business days</span>
               </div>
               <div className="shipping-info">
-                <span className="shipping-icon">🔄</span>
+                <span className="shipping-icon"></span>
                 <span>30-day return policy</span>
               </div>
             </div>

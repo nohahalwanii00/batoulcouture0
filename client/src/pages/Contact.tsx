@@ -208,7 +208,7 @@ const Contact: React.FC = () => {
           </div>
 
           <div className="info-card">
-            <h3>🚚 Shipping Information</h3>
+            <h3>Shipping Information</h3>
             <ul>
               <li>Free shipping on orders over $200</li>
               <li>Express delivery available</li>
@@ -218,7 +218,7 @@ const Contact: React.FC = () => {
           </div>
 
           <div className="info-card">
-            <h3>👗 Services</h3>
+            <h3>Services</h3>
             <ul>
               <li>Custom design consultations</li>
               <li>Professional fittings</li>
