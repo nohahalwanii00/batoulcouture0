@@ -185,7 +185,7 @@
   text-align: center;
   font-size: 2.5rem;
   font-weight: 300;
-  color: #333;
+  color: var(--accent-gold);
   margin-bottom: 3rem;
   font-family: 'Georgia', serif;
 }

@@ -131,7 +131,7 @@ const Home: React.FC = () => {
       <div className="home-container">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading featured dresses...</p>
+          <p>Loading featured abayas...</p>
         </div>
       </div>
     );
@@ -240,7 +240,7 @@ const Home: React.FC = () => {
           </div>
           <div className="view-all-container">
             <Link to="/dresses" className="view-all-button">
-              View All Dresses
+              View All abayas
             </Link>
           </div>
         </div>
@@ -265,17 +265,17 @@ For a more exclusive experience,
             </p>
             <div className="about-features">
               <div className="feature">
-                <div className="feature-icon">✨</div>
+                <div className="feature-icon"></div>
                 <h3>Premium Quality</h3>
                 <p>Hand-selected fabrics and meticulous craftsmanship</p>
               </div>
               <div className="feature">
-                <div className="feature-icon">🎨</div>
+                <div className="feature-icon"></div>
                 <h3>Unique Designs</h3>
                 <p>Exclusive styles you won't find anywhere else</p>
               </div>
               <div className="feature">
-                <div className="feature-icon">💝</div>
+                <div className="feature-icon"></div>
                 <h3>Perfect Fit</h3>
                 <p>Multiple sizes and customization options available</p>
               </div>
