@@ -53,16 +53,26 @@ function normalizeEnvString(value) {
 function requireAuth(req, res, next) {
   try {
     const authHeader = req.headers.authorization || '';
+    // console.log('Auth Header:', authHeader); // Debug logging
     const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
-    if (!token) return res.status(401).json({ message: 'Unauthorized' });
+    
+    if (!token) {
+      console.log('No token provided');
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
     
     const jwtSecret = normalizeEnvString(process.env.JWT_SECRET);
-    jwt.verify(token, jwtSecret || 'dev_secret');
-    next();
+    try {
+      jwt.verify(token, jwtSecret || 'dev_secret');
+    } catch (jwtErr) {
+      console.error('JWT Verify Error:', jwtErr.message);
+      throw jwtErr;
+    }
   } catch (err) {
-    console.error('Auth error:', err.message);
+    console.error('Auth middleware error:', err.message);
     return res.status(401).json({ message: 'Invalid token' });
   }
+  next();
 }
 
 // Configure multer for image uploads (disk storage like real route)
@@ -175,6 +185,7 @@ router.post('/', requireAuth, upload.array('images', 5), async (req, res) => {
     }
 
     mockDresses.unshift(newDress); // newest first
+    saveData(); // Persist changes
     res.status(201).json(newDress);
   } catch (error) {
     res.status(400).json({ message: error.message });

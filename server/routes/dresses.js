@@ -32,15 +32,16 @@ function requireAuth(req, res, next) {
   try {
     const authHeader = req.headers.authorization || '';
     const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
+    
     if (!token) return res.status(401).json({ message: 'Unauthorized' });
     
     const jwtSecret = normalizeEnvString(process.env.JWT_SECRET);
     jwt.verify(token, jwtSecret || 'dev_secret');
-    next();
   } catch (err) {
     console.error('Auth error:', err.message);
     return res.status(401).json({ message: 'Invalid token' });
   }
+  next();
 }
 
 // Configure multer for image uploads (disk storage)
@@ -64,7 +65,7 @@ async function mapImagesToUrls(files, name) {
   for (const file of files) {
     if (useCloudinary) {
       try {
-        const uploadRes = await cloudinary.uploader.upload(path.join('uploads', file.filename), {
+        const uploadRes = await cloudinary.uploader.upload(file.path, {
           folder: 'batoul_couture/dresses',
           public_id: `${Date.now()}_${file.filename}`,
         });

@@ -46,12 +46,8 @@ export const authAPI = {
 export const dressAPI = {
   getAll: (params = {}) => api.get('/dresses', { params }),
   getById: (id: string) => api.get(`/dresses/${id}`),
-  create: (data: FormData) => api.post('/dresses', data, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  }),
-  update: (id: string, data: FormData) => api.put(`/dresses/${id}`, data, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  }),
+  create: (data: FormData) => api.post('/dresses', data),
+  update: (id: string, data: FormData) => api.put(`/dresses/${id}`, data),
   delete: (id: string) => api.delete(`/dresses/${id}`),
   getByCategory: (category: string) => api.get(`/dresses/category/${category}`),
   search: (query: string) => api.get(`/dresses/search?q=${query}`),
