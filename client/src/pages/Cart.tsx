@@ -20,9 +20,9 @@ const Cart: React.FC = () => {
         item.color ? `Color: ${item.color}` : null,
         `Qty: ${item.quantity}`
       ].filter(Boolean).join(' • ');
-      return `${item.name}${details ? ` (${details})` : ''} — ${(item.price * item.quantity).toFixed(2)} TND`;
+      return `${item.name}${details ? ` (${details})` : ''} — ${(item.price * item.quantity).toFixed(2)} $`;
     });
-    const message = `Hello, I'm interested in these items from Batoul's Couture:\n\n${lines.join('\n')}\n\nTotal: ${state.total.toFixed(2)} TND`;
+    const message = `Hello, I'm interested in these items from Batoul's Couture:\n\n${lines.join('\n')}\n\nTotal: ${state.total.toFixed(2)} $`;
     const phoneRaw = '+963 986 583 086';
     const phone = phoneRaw.replace(/[^\d]/g, '');
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
@@ -61,7 +61,7 @@ const Cart: React.FC = () => {
                   </div>
                   <div style={{ marginTop: 4 }}>Qty: {item.quantity}</div>
                 </div>
-                <div style={{ minWidth: 90, textAlign: 'right' }}>{(item.price * item.quantity).toFixed(2)} TND</div>
+                <div style={{ minWidth: 90, textAlign: 'right' }}>{(item.price * item.quantity).toFixed(2)} $</div>
                 <button
                   onClick={() => handleRemove(item._id)}
                   style={{

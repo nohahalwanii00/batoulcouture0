@@ -1,9 +1,41 @@
 const express = require('express');
 const router = express.Router();
-const mockDresses = require('../data/mockDresses');
+const fs = require('fs');
+const path = require('path');
+const initialMockDresses = require('../data/mockDresses');
+
+const DATA_FILE = path.join(__dirname, '../data/mockDresses.json');
+let mockDresses = [];
+
+// Load data helper
+function loadData() {
+  try {
+    if (fs.existsSync(DATA_FILE)) {
+      const data = fs.readFileSync(DATA_FILE, 'utf8');
+      mockDresses = JSON.parse(data);
+    } else {
+      mockDresses = [...initialMockDresses];
+      saveData();
+    }
+  } catch (err) {
+    console.error('Error loading mock data:', err);
+    mockDresses = [...initialMockDresses];
+  }
+}
+
+// Save data helper
+function saveData() {
+  try {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(mockDresses, null, 2));
+  } catch (err) {
+    console.error('Error saving mock data:', err);
+  }
+}
+
+// Initialize data
+loadData();
 
 const multer = require('multer');
-const path = require('path');
 const jwt = require('jsonwebtoken');
 
 
@@ -192,6 +224,7 @@ router.delete('/:id', requireAuth, async (req, res) => {
     }
 
     mockDresses.splice(idx, 1);
+    saveData(); // Persist changes
     res.json({ message: 'Dress deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });

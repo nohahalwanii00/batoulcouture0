@@ -43,6 +43,7 @@ const Dashboard: React.FC = () => {
     stockQuantity: '1',
   });
   const [images, setImages] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
 
   // Edit form state
@@ -61,6 +62,7 @@ const Dashboard: React.FC = () => {
     stockQuantity: '1',
   });
   const [editImages, setEditImages] = useState<File[]>([]);
+  const [editImagePreviews, setEditImagePreviews] = useState<string[]>([]);
   const [editSubmitting, setEditSubmitting] = useState(false);
 
   useEffect(() => {
@@ -139,6 +141,12 @@ const Dashboard: React.FC = () => {
   const handleImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
     setImages(files);
+    
+    // Create previews
+    const newPreviews = files.map(file => URL.createObjectURL(file));
+    // Cleanup old previews
+    imagePreviews.forEach(url => URL.revokeObjectURL(url));
+    setImagePreviews(newPreviews);
   };
 
   // Edit handlers
@@ -212,6 +220,7 @@ const Dashboard: React.FC = () => {
       setDresses(prev => prev.map(d => (String(d._id || d.id) === id ? updated : d)));
       setEditingDress(null);
       setEditImages([]);
+      setEditImagePreviews([]); // Clear previews
       alert('Abaya updated successfully');
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Update failed');
@@ -248,6 +257,7 @@ const Dashboard: React.FC = () => {
         name: '', description: '', price: '', category: DEFAULT_CATEGORY, size: [], color: [], material: '', careInstructions: '', availability: 'in-stock', featured: false, stockQuantity: '1'
       });
       setImages([]);
+      setImagePreviews([]); // Clear previews
       alert('Abaya added successfully');
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Create failed');
@@ -338,6 +348,11 @@ const Dashboard: React.FC = () => {
                 <div>
                   <label>New Images (optional)</label>
                   <input type="file" multiple accept="image/*" onChange={handleEditImagesChange} />
+                  <div style={{ display: 'flex', gap: '10px', marginTop: '10px', flexWrap: 'wrap' }}>
+                    {editImagePreviews.map((src, idx) => (
+                      <img key={idx} src={src} alt="Preview" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '4px' }} />
+                    ))}
+                  </div>
                 </div>
               </div>
               <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
@@ -424,6 +439,11 @@ const Dashboard: React.FC = () => {
               <div>
                 <label>Images</label>
                 <input type="file" multiple accept="image/*" onChange={handleImagesChange} />
+                <div style={{ display: 'flex', gap: '10px', marginTop: '10px', flexWrap: 'wrap' }}>
+                  {imagePreviews.map((src, idx) => (
+                    <img key={idx} src={src} alt="Preview" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '4px' }} />
+                  ))}
+                </div>
               </div>
             </div>
             <div style={{ marginTop: 12 }}>
