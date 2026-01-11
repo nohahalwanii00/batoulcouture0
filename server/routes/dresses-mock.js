@@ -38,15 +38,29 @@ loadData();
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
 
+function normalizeEnvString(value) {
+  if (value === undefined || value === null) return '';
+  const trimmed = String(value).trim();
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1).trim();
+  }
+  return trimmed;
+}
 
 function requireAuth(req, res, next) {
   try {
     const authHeader = req.headers.authorization || '';
     const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
     if (!token) return res.status(401).json({ message: 'Unauthorized' });
-    jwt.verify(token, process.env.JWT_SECRET || 'dev_secret');
+    
+    const jwtSecret = normalizeEnvString(process.env.JWT_SECRET);
+    jwt.verify(token, jwtSecret || 'dev_secret');
     next();
   } catch (err) {
+    console.error('Auth error:', err.message);
     return res.status(401).json({ message: 'Invalid token' });
   }
 }
