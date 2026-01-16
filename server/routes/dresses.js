@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Dress = require('../models/Dress');
+const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
 const jwt = require('jsonwebtoken');
@@ -47,7 +48,11 @@ function requireAuth(req, res, next) {
 // Configure multer for image uploads (disk storage)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+    const uploadPath = path.join(__dirname, '../uploads');
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true });
+    }
+    cb(null, uploadPath);
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9) + path.extname(file.originalname))

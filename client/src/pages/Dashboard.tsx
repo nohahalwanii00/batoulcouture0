@@ -64,6 +64,16 @@ const Dashboard: React.FC = () => {
   const [editImages, setEditImages] = useState<File[]>([]);
   const [editImagePreviews, setEditImagePreviews] = useState<string[]>([]);
   const [editSubmitting, setEditSubmitting] = useState(false);
+  const resolveImageUrl = (u: string) => {
+    if (!u) return u;
+    if (u.startsWith('/uploads')) {
+      const origin = window.location.origin.includes(':3003')
+        ? window.location.origin.replace(':3003', ':5002')
+        : window.location.origin;
+      return origin + u;
+    }
+    return u;
+  };
 
   useEffect(() => {
     // Simple route guard: if no token, redirect to login
@@ -187,6 +197,9 @@ const Dashboard: React.FC = () => {
   const handleEditImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
     setEditImages(files);
+    const previews = files.map(file => URL.createObjectURL(file));
+    editImagePreviews.forEach(url => URL.revokeObjectURL(url));
+    setEditImagePreviews(previews);
   };
 
   const handleEditCancel = () => {
@@ -475,7 +488,7 @@ const Dashboard: React.FC = () => {
                   <tr key={dress._id || dress.id}>
                     <td className="cell-image">
                       {dress.images && dress.images.length > 0 ? (
-                        <img src={dress.images[0].url} alt={dress.images[0].alt || dress.name} className="thumb" />
+                        <img src={resolveImageUrl(dress.images[0].url)} alt={dress.images[0].alt || dress.name} className="thumb" />
                       ) : (
                         <span>No Image</span>
                       )}

@@ -1,45 +1,30 @@
 [
   {
-    "_id": "8",
-    "name": "ohilj",
-    "description": "xdtucfyivg blhnjucvyghj",
-    "price": 86,
-    "category": "2024 Winter Collection",
+    "_id": "7",
+    "name": "hhh",
+    "description": "fffffffffffff",
+    "price": 99,
+    "category": "Abaya underdresses",
     "size": [
       "XL"
     ],
     "color": [
-      "green"
+      "white"
     ],
-    "images": [],
-    "material": "Cotton Blend",
-    "careInstructions": "Hand wash cold, lay flat to dry. Do not wring or twist.",
-    "availability": "limited",
-    "stockQuantity": 189,
-    "featured": false,
-    "createdAt": "2026-01-11T20:56:40.424Z",
-    "updatedAt": "2026-01-11T20:56:40.424Z"
-  },
-  {
-    "_id": "7",
-    "name": "hhh",
-    "description": "igubhkyityguk",
-    "price": 99,
-    "category": "Black abayas Kuwaiti",
-    "size": [
-      "L"
+    "images": [
+      {
+        "url": "/uploads/1768575078049-152874923.png",
+        "alt": "hhh",
+        "isMain": true
+      }
     ],
-    "color": [
-      "gold"
-    ],
-    "images": [],
     "material": "Wool Blend",
     "careInstructions": "Dry clean recommended. Hang on proper hanger to maintain shape.",
-    "availability": "limited",
-    "stockQuantity": 17,
+    "availability": "in-stock",
+    "stockQuantity": 1,
     "featured": false,
-    "createdAt": "2026-01-11T20:56:09.953Z",
-    "updatedAt": "2026-01-11T20:56:09.953Z"
+    "createdAt": "2026-01-16T14:51:18.074Z",
+    "updatedAt": "2026-01-16T14:51:18.074Z"
   },
   {
     "_id": "1",
@@ -171,14 +156,20 @@
     "price": 149,
     "category": "casual",
     "size": [
-      "XS",
-      "S",
-      "M",
+      [
+        [
+          "XS",
+          "S"
+        ],
+        "M"
+      ],
       "L"
     ],
     "color": [
-      "Pink",
-      "Blue",
+      [
+        "Pink",
+        "Blue"
+      ],
       "Yellow"
     ],
     "images": [
@@ -194,7 +185,7 @@
     "stockQuantity": 8,
     "featured": false,
     "createdAt": "2024-01-25T00:00:00.000Z",
-    "updatedAt": "2024-01-25T00:00:00.000Z"
+    "updatedAt": "2026-01-13T15:17:53.599Z"
   },
   {
     "_id": "5",

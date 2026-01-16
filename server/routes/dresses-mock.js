@@ -11,9 +11,12 @@ let mockDresses = [];
 function loadData() {
   try {
     if (fs.existsSync(DATA_FILE)) {
+      console.log('Loading mock data from:', DATA_FILE);
       const data = fs.readFileSync(DATA_FILE, 'utf8');
       mockDresses = JSON.parse(data);
+      console.log(`Loaded ${mockDresses.length} dresses.`);
     } else {
+      console.log('No mock data file found. Creating initial data.');
       mockDresses = [...initialMockDresses];
       saveData();
     }
@@ -26,7 +29,9 @@ function loadData() {
 // Save data helper
 function saveData() {
   try {
+    console.log('Saving mock data to:', DATA_FILE);
     fs.writeFileSync(DATA_FILE, JSON.stringify(mockDresses, null, 2));
+    console.log('Mock data saved successfully.');
   } catch (err) {
     console.error('Error saving mock data:', err);
   }
@@ -78,7 +83,11 @@ function requireAuth(req, res, next) {
 // Configure multer for image uploads (disk storage like real route)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+    const uploadPath = path.join(__dirname, '../uploads');
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true });
+    }
+    cb(null, uploadPath);
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9) + path.extname(file.originalname))
@@ -149,6 +158,7 @@ router.get('/:id', async (req, res) => {
 // POST create new dress (accept multipart/form-data during development)
 router.post('/', requireAuth, upload.array('images', 5), async (req, res) => {
   try {
+    console.log('Mock POST /dresses files:', Array.isArray(req.files) ? req.files.length : 0);
     // Extract arrays from body (support comma-separated or repeated fields)
     const rawSize = req.body.size ?? req.body['size[]'] ?? req.body.sizes ?? req.body['sizes[]'];
     const rawColor = req.body.color ?? req.body['color[]'] ?? req.body.colors ?? req.body['colors[]'];
@@ -195,6 +205,7 @@ router.post('/', requireAuth, upload.array('images', 5), async (req, res) => {
 // PUT update dress (accept multipart/form-data)
 router.put('/:id', requireAuth, upload.array('images', 5), async (req, res) => {
   try {
+    console.log('Mock PUT /dresses/:id files:', Array.isArray(req.files) ? req.files.length : 0);
     const idx = mockDresses.findIndex(dress => dress._id === req.params.id);
     if (idx === -1) {
       return res.status(404).json({ message: 'Dress not found' });
@@ -234,6 +245,7 @@ router.put('/:id', requireAuth, upload.array('images', 5), async (req, res) => {
       updatedAt: new Date()
     };
 
+    saveData();
     res.json(mockDresses[idx]);
   } catch (error) {
     res.status(400).json({ message: error.message });
