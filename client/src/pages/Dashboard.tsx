@@ -6,9 +6,9 @@ import './Dashboard.css';
 
 const CATEGORY_OPTIONS = [
   'Abaya underdresses',
-  'dresses',
   'Black abayas Kuwaiti',
- '2025 Winter Collection',
+  'dresses',
+  '2025 Winter Collection',
   '2026 Winter Collection',
   '2026 Summer Collection',
   'Chemise',
@@ -47,7 +47,7 @@ const Dashboard: React.FC = () => {
   const [images, setImages] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
-
+                                  
   // Edit form state
   const [editingDress, setEditingDress] = useState<Dress | null>(null);
   const [editForm, setEditForm] = useState({

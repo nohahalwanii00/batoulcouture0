@@ -16,9 +16,9 @@ const Dresses: React.FC = () => {
   const categories = [
     'all',
     'Abaya underdresses',
-    'dresses',
     'Black abayas Kuwaiti',
-     '2025 Winter Collection',
+    'dresses',
+    '2025 Winter Collection',
     '2026 Winter Collection',
     '2026 Summer Collection',
     'Chemise',
