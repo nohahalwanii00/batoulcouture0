@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 
 const CATEGORY_OPTIONS = [
   'Abaya underdresses',
+  'dresses',
   'Black abayas Kuwaiti',
-  '2024 Winter Collection',
-  '2025 Summer Collection',
+  '2025 Winter Collection',
+  '2026 Winter Collection',
+  '2026 Summer Collection',
   'Chemise',
   'Set',
   'Scarfs',
